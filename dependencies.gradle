@@ -37,6 +37,7 @@ def embedMixin = !project.hasProperty("nomixin");
 dependencies {
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
     runtimeOnlyNonPublishable("curse.maven:Nashorn-374413:2924946")
+    runtimeOnlyNonPublishable(rfg.deobf(files("../Klaymore/libs/InputFix.jar")))
 
     implementation("com.earthforge:klaymore:1.0.0")
 
