@@ -18,11 +18,3 @@ pluginManagement {
 plugins {
     id("com.gtnewhorizons.gtnhsettingsconvention") version("2.0.20")
 }
-
-includeBuild("../Klaymore") {
-    dependencySubstitution {
-        substitute(module("com.earthforge:klaymore")).using(project(":"))
-    }
-}
-
-

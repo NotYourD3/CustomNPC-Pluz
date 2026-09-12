@@ -37,31 +37,6 @@ def embedMixin = !project.hasProperty("nomixin");
 dependencies {
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
     runtimeOnlyNonPublishable("curse.maven:Nashorn-374413:2924946")
-    runtimeOnlyNonPublishable(rfg.deobf(files("../Klaymore/libs/InputFix.jar")))
-
-    implementation("com.earthforge:klaymore:1.0.0")
-
-    // ⚠️ Klaymore 运行时：包含 relocate 后的 Kotlin 标准库（com.earthforge.klaymore.shadow.* 包）。
-    //   Klaymore 主 Mod JAR 本身不包含 Kotlin 类本体，必须同时加载 klaymore-runtime.jar。
-    //   发布时：把 klaymore-runtime.jar 和本 Mod JAR、Klaymore JAR 一起放入 mods/ 文件夹。
-    //   开发时：直接引用 Klaymore 项目下已构建好的 runtime jar（如果存在）。
-    def klaymoreRuntimeJar = file('../Klaymore/libs/klaymore-runtime.jar')
-    if (klaymoreRuntimeJar.exists()) {
-        runtimeOnlyNonPublishable files(klaymoreRuntimeJar.path)
-        logger.lifecycle "[CustomNpc+Klaymore] 已加载 klaymore-runtime.jar (开发模式): ${klaymoreRuntimeJar.absolutePath}"
-    } else {
-        // 兜底：也检查本项目 libs 目录下是否有复制过来的 runtime jar
-        def localRuntimeJar = file('libs/klaymore-runtime.jar')
-        if (localRuntimeJar.exists()) {
-            runtimeOnlyNonPublishable files(localRuntimeJar.path)
-            logger.lifecycle "[CustomNpc+Klaymore] 已加载 klaymore-runtime.jar (本地): ${localRuntimeJar.absolutePath}"
-        } else {
-            logger.warn "[CustomNpc+Klaymore] ⚠️  未找到 klaymore-runtime.jar！"
-            logger.warn "  请先在 Klaymore 项目执行：./gradlew :script-runtime:build"
-            logger.warn "  或者将 klaymore-runtime.jar 复制到本项目的 libs/ 目录下。"
-            logger.warn "  缺少此 jar 将导致运行时 NoClassDefFoundError: com.earthforge.klaymore.shadow.kotlin.*"
-        }
-    }
 
     if(embedMixin){
         // Normal Jar will include built in Mixins

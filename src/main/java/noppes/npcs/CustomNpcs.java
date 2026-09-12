@@ -1,7 +1,5 @@
 package noppes.npcs;
 
-import com.earthforge.compat.NpcEventHandler;
-import com.earthforge.compat.NpcTargetExtractors;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -237,9 +235,6 @@ public class CustomNpcs {
         new AddonManager();
         new AttributeController();
         new MagicController();
-
-        NpcAPI.EVENT_BUS.register(new NpcEventHandler());
-        NpcTargetExtractors.registerAll();
     }
 
     @EventHandler
